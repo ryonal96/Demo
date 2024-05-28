@@ -4,4 +4,27 @@
 -Controllers: là phần back-end, trung tâm xử lý, ví dụ: users_controller sẽ quản lý các chức năng của users
 
 +Cách thức MVC hoạt động:
--Từ ứng dụng sẽ tạo request sau đấy request sẽ được router (config/routes.rb) tiếp nhận
+    -Từ trình duyệt sẽ tạo request: http://localhost:3000/home/about
+    -Request sẽ được nhận tại config/routes.rb
+
+            Rails.application.routes.draw do
+                get 'home/about'
+            end
+
+        Khớp với resquet này GET "/home/about" to HomeController#about.
+    -Request Routed sẽ dẫn đến Action thích hợp trong Controller:
+
+        Request yêu cầu hành động about trong HomeController.
+    -Action trong controller sẽ render Views hoặc liên hệ với Models
+
+        class HomeController < ApplicationController
+            def about
+            end
+        end
+    -Models sẽ liên lạc với Database
+    -Models gửi thông tin trở lại Controller
+    -Controller sẽ render Views
+        Rendering layout layouts/application.html.erb
+        Rendering home/about.html.erb within layouts/application
+    -Phản hổi được gửi đến trình duyệt.
+        HTML được hiển thị được gửi trở lại trình duyệt dưới dạng phản hồi HTTP.
